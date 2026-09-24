@@ -14,7 +14,7 @@ dependencies — `npm test` is a few hundred milliseconds on stock Node 18+,
 so an agent can edit, run, read the failure and iterate without any of that
 time being setup.
 
-The behaviours are the standard ones from the OAuth refresh-token rotation
+The behaviors are the standard ones from the OAuth refresh-token rotation
 pattern (see the IETF OAuth 2.0 Security Best Current Practice, RFC 9700).
 
 ## What the code does
@@ -55,9 +55,9 @@ src/tokenRotation.js    the code under test
 test/                         the partial suite
 ```
 
-`src/store.js` is not a database. It models the two behaviours the service
+`src/store.js` is not a database. It models the two behaviors the service
 depends on — transactions and a row write lock — which is what the
-concurrency behaviour needs in order to be observable at all.
+concurrency behavior needs in order to be observable at all.
 
 ## Running
 
