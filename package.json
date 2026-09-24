@@ -1,0 +1,14 @@
+{
+  "name": "pepper-grinder",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Refresh-token rotation with reuse detection — a self-contained fixture for exercising coding agents on security-sensitive code.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  }
+}

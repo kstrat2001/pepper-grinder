@@ -1,0 +1,22 @@
+{
+  "name": "pepper-grinder",
+  "version": "2.0",
+  "satisfies": "node-pepper-grinder-js@2.0",
+  "language": "nodejs",
+  "verify_command": "npm test",
+  "baseline": {
+    "test_count": 14,
+    "service_test_files": [
+      "test/tokenRotation.test.js",
+      "test/portability.test.js"
+    ]
+  },
+  "required_files": [
+    "src/config.js",
+    "src/store.js",
+    "src/tokenRotation.js",
+    "test/tokenRotation.test.js",
+    "package.json",
+    "test/portability.test.js"
+  ]
+}

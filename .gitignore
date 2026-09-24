@@ -1,0 +1,84 @@
+# ── dependencies ─────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+.yarn/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ── secrets: nothing here needs any, so anything matching is a mistake ──
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+id_rsa*
+id_ed25519*
+credentials
+credentials.json
+*.credentials
+secrets.json
+.netrc
+.npmrc
+
+# ── build and test output ────────────────────────────────────
+dist/
+build/
+out/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+*.lcov
+junit.xml
+test-results/
+
+# ── logs and crash output ────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+core
+*.stackdump
+
+# ── agent and harness artifacts ──────────────────────────────
+# A coding agent runs against a copy of this tree and can leave
+# scratch behind. None of it belongs in the repo.
+.darkmux/
+.darkmux-runtime/
+trajectory.jsonl
+metrics.json
+qa-reply.json
+qa-reply.err
+verify-output.txt
+sandbox/
+.scratch/
+scratchpad/
+
+# ── archives
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.rar
+
+# ── editors and OS ───────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
