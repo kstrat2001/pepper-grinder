@@ -136,6 +136,21 @@ darkmux lab fixture register /path/to/pepper-grinder
 It records the content hash, the verify command, and the 14-test baseline. The
 file is harmless if you are not using darkmux; it is plain metadata.
 
+## The eval is defined here
+
+From 2.1 this repository defines the whole eval, not only the code under test.
+`eval/` holds the darkmux workload (`eval/workloads/pepper-grinder.json`): the
+prompt the model is given and the rules that grade the result, each quoting the
+prompt sentence it checks, with the planted bugs the behaviors check uses.
+darkmux processes the eval; it does not define it. `eval/` is never copied into
+the model's sandbox, so the model cannot see how it is graded, and runs report
+the sha256 of the workload document they used.
+
+```bash
+darkmux lab fixture register /path/to/pepper-grinder
+darkmux lab run pepper-grinder -p <profile>
+```
+
 ## License
 
 MIT. See `LICENSE`.
