@@ -1,6 +1,6 @@
 {
   "name": "pepper-grinder",
-  "version": "2.1",
+  "version": "2.2",
   "satisfies": "node-pepper-grinder-js@2.1",
   "language": "nodejs",
   "verify_command": "npm test",

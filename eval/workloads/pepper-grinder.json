@@ -65,37 +65,43 @@
               "behavior": "pepper",
               "file": "src/tokenRotation.js",
               "find": ".update(secret + readPepper())",
-              "replace": ".update(secret)"
+              "replace": ".update(secret)",
+              "criterion": "pepper"
             },
             {
               "behavior": "row lock",
               "file": "src/tokenRotation.js",
               "find": "const row = await trx.lockByDigest(digest);",
-              "replace": "const row = trx.findByDigest(digest); await trx.lockByDigest(digest);"
+              "replace": "const row = trx.findByDigest(digest); await trx.lockByDigest(digest);",
+              "criterion": "row-lock"
             },
             {
               "behavior": "boot guard",
               "file": "src/tokenRotation.js",
               "find": "const inDevMode = env === \"development\";",
-              "replace": "const inDevMode = env === \"development\" || env == null;"
+              "replace": "const inDevMode = env === \"development\" || env == null;",
+              "criterion": "boot-guard"
             },
             {
               "behavior": "boot guard",
               "file": "src/tokenRotation.js",
               "find": "if (!inDevMode && pepper === LOCAL_PEPPER_STANDIN)",
-              "replace": "if (false)"
+              "replace": "if (false)",
+              "criterion": "boot-guard"
             },
             {
               "behavior": "expiry parsing",
               "file": "src/tokenRotation.js",
               "find": "!Number.isFinite(expiryMs) || ",
-              "replace": ""
+              "replace": "",
+              "criterion": "expiry-parsing"
             },
             {
               "behavior": "expiry parsing",
               "file": "src/tokenRotation.js",
               "find": "const expiryMs = new Date(row.expiry).getTime();",
-              "replace": "const expiryMs = row.expiry instanceof Date ? row.expiry.getTime() : NaN;"
+              "replace": "const expiryMs = row.expiry instanceof Date ? row.expiry.getTime() : NaN;",
+              "criterion": "expiry-parsing"
             }
           ]
         },
@@ -104,7 +110,45 @@
             "## Reply format"
           ],
           "required": true
-        }
+        },
+        "criteria": [
+          {
+            "id": "pepper",
+            "name": "Pepper in the token hash",
+            "description": "Tokens are hashed at rest with the configured pepper, so a test fails if the pepper is dropped from the hash.",
+            "source": {
+              "path": "src/tokenRotation.js",
+              "anchor": ".update(secret + readPepper())"
+            }
+          },
+          {
+            "id": "row-lock",
+            "name": "Row lock during rotation",
+            "description": "Two concurrent rotations of the same token cannot both succeed, so a test fails if rotation stops taking the per-row lock.",
+            "source": {
+              "path": "src/tokenRotation.js",
+              "anchor": "const row = await trx.lockByDigest(digest);"
+            }
+          },
+          {
+            "id": "boot-guard",
+            "name": "Boot guard on the dev pepper",
+            "description": "Outside development the service refuses to start with the dev placeholder pepper, and in development it starts.",
+            "source": {
+              "path": "src/tokenRotation.js",
+              "anchor": "const inDevMode = env === \"development\";"
+            }
+          },
+          {
+            "id": "expiry-parsing",
+            "name": "Expiry parsing",
+            "description": "An expired or unparseable expiry timestamp is treated as expired, whether stored as a Date or an ISO string.",
+            "source": {
+              "path": "src/tokenRotation.js",
+              "anchor": "!Number.isFinite(expiryMs) || "
+            }
+          }
+        ]
       }
     }
   }
