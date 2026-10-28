@@ -6,6 +6,21 @@ authentication. The subject is refresh-token rotation with reuse detection: smal
 enough to read in one sitting, subtle enough that partial test coverage
 looks complete.
 
+## At a glance
+
+| | |
+| --- | --- |
+| Kind | Coding with tools: the model edits and runs a sandboxed copy of this repo, without `eval/` |
+| Version | 2.3 (tag `2.3`, commit `ffb6216`) |
+| Criteria | 4, each recorded as met or missed on every run |
+| Results | [evals.darkmux.com/evals/pepper-grinder](https://evals.darkmux.com/evals/pepper-grinder) |
+| Needs | darkmux 5.9.0 or later |
+| License | MIT |
+
+The eval's page on evals.darkmux.com names the approved commit, lists the
+criteria and shows which ones each run met. The criteria are not listed here
+because this file is inside the model's sandbox.
+
 ## Why this shape
 
 An agent benchmark needs a task where **running the tests is the feedback
@@ -124,21 +139,6 @@ happens rather than after handoff.
 
 It is deliberately excluded from its own checks, since the guard necessarily
 contains the patterns it looks for.
-
-## At a glance
-
-| | |
-| --- | --- |
-| Kind | Coding with tools: the model edits and runs a sandboxed copy of this repo, without `eval/` |
-| Version | 2.3 (tag `2.3`, commit `ffb6216`) |
-| Criteria | 4, each recorded as met or missed on every run |
-| Results | [evals.darkmux.com/evals/pepper-grinder](https://evals.darkmux.com/evals/pepper-grinder) |
-| Needs | darkmux 5.9.0 or later |
-| License | MIT |
-
-The eval's page on evals.darkmux.com names the approved commit, lists the
-criteria and shows which ones each run met. They are not listed in this file
-because this file is inside the model's sandbox.
 
 ## Run it with darkmux
 
