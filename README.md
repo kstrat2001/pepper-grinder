@@ -144,7 +144,11 @@ prompt the model is given and the rules that grade the result, each quoting the
 prompt sentence it checks, with the planted bugs the behaviors check uses.
 darkmux processes the eval; it does not define it. `eval/` is never copied into
 the model's sandbox, so the model cannot see how it is graded, and runs report
-the sha256 of the workload document they used.
+the sha256 of the workload document they used. `eval/roles/coder.json` and
+`eval/roles/coder.md` are the role the model runs as, system prompt included:
+darkmux's built-in `coder`, copied in so the eval pins it. darkmux reads the
+role from here, never from the machine's own settings, and each run records the
+sha256 of both files.
 
 ```bash
 darkmux lab fixture register /path/to/pepper-grinder

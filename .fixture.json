@@ -1,6 +1,6 @@
 {
   "name": "pepper-grinder",
-  "version": "2.2",
+  "version": "2.3",
   "satisfies": "node-pepper-grinder-js@2.1",
   "language": "nodejs",
   "verify_command": "npm test",
@@ -18,8 +18,10 @@
     "test/tokenRotation.test.js",
     "package.json",
     "test/portability.test.js",
-    "eval/workloads/pepper-grinder.json"
+    "eval/workloads/pepper-grinder.json",
+    "eval/roles/coder.json",
+    "eval/roles/coder.md"
   ],
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "eval_dir": "eval"
 }
