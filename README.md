@@ -6,6 +6,21 @@ authentication. The subject is refresh-token rotation with reuse detection: smal
 enough to read in one sitting, subtle enough that partial test coverage
 looks complete.
 
+## At a glance
+
+| | |
+| --- | --- |
+| Kind | Coding with tools: the model edits and runs a sandboxed copy of this repo, without `eval/` |
+| Version | 2.3 (tag `2.3`, commit `ffb6216`) |
+| Criteria | 4, each recorded as met or missed on every run |
+| Results | [evals.darkmux.com/evals/pepper-grinder](https://evals.darkmux.com/evals/pepper-grinder) |
+| Needs | darkmux 5.9.0 or later |
+| License | MIT |
+
+The eval's page on evals.darkmux.com names the approved commit, lists the
+criteria and shows which ones each run met. The criteria are not listed here
+because this file is inside the model's sandbox.
+
 ## Why this shape
 
 An agent benchmark needs a task where **running the tests is the feedback
@@ -125,18 +140,25 @@ happens rather than after handoff.
 It is deliberately excluded from its own checks, since the guard necessarily
 contains the patterns it looks for.
 
-## Using it as a darkmux fixture
-
-`.fixture.json` lets darkmux register this directory directly:
+## Run it with darkmux
 
 ```bash
-darkmux lab fixture register /path/to/pepper-grinder
+git clone https://github.com/kstrat2001/pepper-grinder
+cd pepper-grinder
+git checkout <approved commit>     # named on the eval's page
+darkmux lab fixture register .
+darkmux lab run pepper-grinder -p <profile>
+darkmux run inspect <run id>       # the verdict, time and turns
 ```
 
-It records the content hash, the verify command, and the 14-test baseline. The
-file is harmless if you are not using darkmux; it is plain metadata.
+Leave the checkout unchanged: a run from any other commit, or from a checkout
+with changes in it, cannot be shared. To share a run on evals.darkmux.com, run
+`darkmux lab submit <run id> --dry-run` to see exactly what would be sent, then
+`darkmux lab submit <run id>`. The
+[share-runs guide](https://darkmux.com/guide/share-runs.html) covers upload
+access and what a bundle carries.
 
-## The eval is defined here
+## What `eval/` holds
 
 From 2.1 this repository defines the whole eval, not only the code under test.
 `eval/` holds the darkmux workload (`eval/workloads/pepper-grinder.json`): the
@@ -149,11 +171,6 @@ the sha256 of the workload document they used. `eval/roles/coder.json` and
 darkmux's built-in `coder`, copied in so the eval pins it. darkmux reads the
 role from here, never from the machine's own settings, and each run records the
 sha256 of both files.
-
-```bash
-darkmux lab fixture register /path/to/pepper-grinder
-darkmux lab run pepper-grinder -p <profile>
-```
 
 ## License
 
